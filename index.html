@@ -1,110 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Official Website</title>
+    <title>我的视频网站</title>
     <style>
-        :root {
-            --primary-color: #24A1DE; /* Telegram 官方蓝 */
-            --bg-color: #0d1117; /* 暗黑潮流背景 */
-            --text-color: #ffffff;
-        }
         body {
             margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            padding: 20px;
+            background-color: #f5f5f5;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            min-height: 100vh;
+            font-family: -apple-system, sans-serif;
         }
         .container {
+            max-width: 800px;
             width: 100%;
-            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             text-align: center;
         }
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid var(--primary-color);
-            object-fit: cover;
-            margin-bottom: 15px;
-        }
-        h1 { margin: 10px 0 5px 0; font-size: 24px; }
-        p { color: #8b949e; margin-bottom: 30px; font-size: 16px; }
-        
-        /* 媒体元素样式 */
-        .media-box {
-            background: #161b22;
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        .media-box video, .media-box img {
+        video {
             width: 100%;
-            border-radius: 10px;
-            display: block;
-        }
-        
-        /* TG引流按钮 */
-        .tg-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(36, 161, 222, 0.4);
-            margin: 30px 0;
-        }
-        .tg-button:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 20px rgba(36, 161, 222, 0.6);
+            border-radius: 8px;
+            outline: none;
+            background-color: #000;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- 你的头像 -->
-        <img class="avatar" src="https://placeholder.com" alt="Avatar">
-        
-        <!-- 名字与简介 -->
-        <h1>Your Live Stream Name</h1>
-        <p>🔴 Live Streamer | Content Creator</p>
-
-        <!-- 强烈的 Telegram 引流按钮 -->
-        <a href="https://t.me" target="_blank" class="tg-button">
-            💬 Join My Telegram Community
-        </a>
-
-        <!-- 视频嵌入区域 (支持本地视频或YouTube等外链) -->
-        <div class="media-box">
-            <h3 style="margin-top:0; text-align:left;">🔥 Latest Highlights</h3>
-            <!-- 替换 src 里面的视频地址，如果是 YouTube 视频可以使用 <iframe> 嵌入 -->
-            <video controls poster="https://placeholder.com">
-                <source src="K0ghSHlfPCDj_77I.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-
-        <!-- 图片/海报展示区域 -->
-        <div class="media-box">
-            <h3 style="margin-top:0; text-align:left;">📸 Upcoming Schedule</h3>
-            <img src="https://placeholder.com" alt="Stream Schedule">
-        </div>
-        
-    </div>
+<div class="container">
+    <h2>我的录制视频</h2>
+    <video controls preload="auto">
+        <source src="ZW889.mp4" type="video/mp4">
+        您的浏览器不支持播放该视频。
+    </video>
+</div>
 
 </body>
 </html>
