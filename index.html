@@ -3,44 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的视频网站</title>
+    <title>魅影TV - 热门女神直播精彩回放</title>
     <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: -apple-system, sans-serif;
+        /* 基础样式复位 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #0f0f12; color: #f5f5f7; line-height: 1.6; }
+        
+        /* 导航栏 */
+        header { background-color: #16161a; color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.5); border-bottom: 2px solid #fd79a8; }
+        .logo { font-size: 24px; font-weight: bold; color: #fd79a8; text-decoration: none; text-shadow: 0 0 10px rgba(253, 121, 168, 0.5); }
+        nav a { color: #aaa; text-decoration: none; margin-left: 20px; font-size: 15px; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: #fd79a8; font-weight: bold; }
+
+        /* 主体布局 */
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
+
+        /* 左侧内容区：视频与介绍 */
+        .main-content { background: #1b1b22; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .video-wrapper { background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(253, 121, 168, 0.2); }
+        video { width: 100%; display: block; outline: none; }
+        .video-title { font-size: 22px; margin-bottom: 10px; font-weight: 600; color: #fff; }
+        .video-meta { font-size: 13px; color: #888; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #2e2e38; }
+        .video-description { font-size: 14px; color: #ccc; text-align: justify; margin-bottom: 20px; }
+
+        /* 🔥 特效引流按钮样式 */
+        .tg-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #0088cc, #24a1de); color: white; text-decoration: none; padding: 14px 20px; border-radius: 30px; font-size: 18px; font-weight: bold; text-align: center; box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4); transition: all 0.3s ease; animation: pulse 2s infinite; margin-top: 15px; }
+        .tg-btn:hover { background: linear-gradient(135deg, #24a1de, #0088cc); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 136, 204, 0.6); }
+        
+        /* 按钮呼吸动画特效 */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); box-shadow: 0 4px 25px rgba(0, 136, 204, 0.7); }
+            100% { transform: scale(1); }
         }
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        video {
-            width: 100%;
-            border-radius: 8px;
-            outline: none;
-            background-color: #000;
+
+        /* 右侧内容区 */
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .widget { background: #1b1b22; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .widget-title { font-size: 16px; font-weight: bold; margin-bottom: 15px; border-left: 4px solid #fd79a8; padding-left: 10px; color: #fff; }
+        
+        /* 侧边栏引流广告位 */
+        .ad-banner { background: #251e27; border: 2px dashed #fd79a8; border-radius: 8px; padding: 15px; text-align: center; color: #fd79a8; text-decoration: none; display: block; transition: transform 0.2s; }
+        .ad-banner:hover { transform: scale(1.02); }
+        .ad-banner img { width: 100%; max-height: 140px; object-fit: cover; border-radius: 6px; margin-bottom: 10px; }
+        .ad-tag { display: inline-block; background: #fd79a8; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px; float: right; margin-top: -5px; }
+
+        /* 精彩视频推荐列表 */
+        .recommend-item { display: flex; gap: 10px; margin-bottom: 15px; text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        .recommend-item:hover { opacity: 0.8; }
+        .recommend-item img { width: 100px; height: 60px; object-fit: cover; border-radius: 6px; background: #2a2a35; }
+        .recommend-info h4 { font-size: 14px; line-height: 1.3; color: #eee; }
+        .recommend-info p { font-size: 12px; color: #fd79a8; margin-top: 5px; }
+
+        /* 页脚 */
+        footer { background: #16161a; color: #666; text-align: center; padding: 20px; font-size: 13px; margin-top: 40px; border-top: 2px solid #2e2e38; }
+
+        /* 移动端全面自适应 */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            header { padding: 15px; }
+            nav { display: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>我的录制视频</h2>
-    <video controls preload="auto">
-        <source src="ZW889.mp4" type="video/mp4">
-        您的浏览器不支持播放该视频。
-    </video>
-</div>
+    <!-- 顶部导航 -->
+    <header>
+        <a href="#" class="logo">🔮 魅影TV</a>
+        <nav>
+            <a href="#" class="active">女神回放</a>
+            <a href="#">福利专区</a>
+            <a href="#">私密频道</a>
+            <a href="#">联系客服</a>
+        </nav>
+    </header>
+
+    <!-- 主容器 -->
+    <div class="container">
+        
+        <!-- 左侧：主要视频播放与TG引流 -->
+        <div class="main-content">
+            <div class="video-wrapper">
+                <!-- 核心：自动读取加载你保存在GitHub目录下的视频文件 ZW889.mp4 -->
+                <video controls preload="auto" poster="https://picsum.photos">
+                    <source src="ZW889.mp4" type="video/mp4">
+                    您的浏览器不支持播放该视频。
+                </video>
+            </div>
+            <h1 class="video-title">【独家私密回放】高颜值尤物女主播·深夜心动福利瞬间</h1>
+            <div class="video-meta">本场热度：🔥 52.8万 · 录制投稿 · 已收录至精品库</div>
+            <p class="video-description">
+                错过了昨晚直播间的精彩整活？这里为你奉上无删减高清录制版！顶级身材尤物女主播激情互动、大秀才艺，名场面高能不断。网页加载已完成无损画质还原。如果你想解锁更多该主播的未删减私密日常、定制VLOG和第一手福利动态，赶快点击下方加入我们的官方 Telegram 交流群！
+            </p>
+
+            <!-- 🔥 左侧主引流按钮（请将下面的 t.me/xxxx 换成你真实的 TG 链接） -->
+            <a href="https://t.me" target="_blank" class="tg-btn">
+                ✈️ 点击加入 Telegram 私密粉丝群（解锁更多精选）
+            </a>
+        </div>
+
+        <!-- 右侧边栏：侧边栏TG广告与其它主播推荐 -->
+        <div class="sidebar">
+            
+            <!-- 侧边栏高亮引流卡片 -->
+            <div class="widget">
+                <div class="widget-title">官方永久社群 <span class="ad-tag">推荐</span></div>
+                <!-- 请将下面的 t.me/xxxx 换成你真实的 TG 频道或群组链接 -->
+                <a href="https://t.me" target="_blank" class="ad-banner">
+                    <img src="https://picsum.photos" alt="TG引流图">
+                    <strong>👉 极品御姐/萝莉资源天天更新 👈</strong>
+                    <p style="font-size: 13px; color: #bbb; margin-top: 8px; background: #0088cc; color:#fff; padding: 6px; border-radius:4px;">
+                        点此一键直达 Telegram 频道
+                    </p>
+                </a>
+            </div>
+
+            <!-- 其它女主播精彩推荐 -->
+            <div class="widget">
+                <div class="widget-title">实时热播回放</div>
+                
+                <a href="#" class="recommend-item">
+                    <img src="https://picsum.photos" alt="推荐">
+                    <div class="recommend-info">
+                        <h4>【百变妖精】性感黑丝热舞，直播间热度直接破百万</h4>
+                        <p>🔥 34.2万次观看</p>
+                    </div>
+                </a>
+
+                <a href="#" class="recommend-item">
+                    <img src="https://picsum.photos" alt="推荐">
+                    <div class="recommend-info">
+                        <h4>【纯欲天花板】清纯女神深夜连麦，土豪疯狂刷屏</h4>
+                        <p>🔥 19.9万次观看</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="recommend-item">
+                    <img src="https://picsum.photos" alt="推荐">
+                    <div class="recommend-info">
+                        <h4>【大尺度爆料】查房名场面：女主播和粉丝私密互动</h4>
+                        <p>🔥 45.1万次观看</p>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>© 2026 魅影TV · 聚合全网最火爆的女神直播名场面 · 未满18岁请主动离开</p>
+    </footer>
 
 </body>
 </html>
