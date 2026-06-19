@@ -1,151 +1,136 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>魅影TV - 热门女神直播精彩回放</title>
+    <title>Lovense Live - Premium Private Interactive Room</title>
     <style>
-        /* 基础样式复位 */
+        /* 基础炫酷暗黑风格 */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #0f0f12; color: #f5f5f7; line-height: 1.6; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #0b0b0e; color: #f5f5f7; line-height: 1.6; }
         
-        /* 导航栏 */
-        header { background-color: #16161a; color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.5); border-bottom: 2px solid #fd79a8; }
-        .logo { font-size: 24px; font-weight: bold; color: #fd79a8; text-decoration: none; text-shadow: 0 0 10px rgba(253, 121, 168, 0.5); }
-        nav a { color: #aaa; text-decoration: none; margin-left: 20px; font-size: 15px; transition: color 0.3s; }
-        nav a:hover, nav a.active { color: #fd79a8; font-weight: bold; }
+        /* 霓虹顶部导航 */
+        header { background-color: #121216; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid #ff007f; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); }
+        .logo { font-size: 24px; font-weight: bold; color: #ff007f; text-decoration: none; text-shadow: 0 0 10px rgba(255, 0, 127, 0.6); }
+        .status-badge { background: #2ecc71; color: white; font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: bold; animation: blink 1.5s infinite; }
+        
+        @keyframes blink { 50% { opacity: 0.5; } }
 
         /* 主体布局 */
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
+        .container { max-width: 1100px; margin: 20px auto; padding: 0 15px; display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 25px; }
 
-        /* 左侧内容区：视频与介绍 */
-        .main-content { background: #1b1b22; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .video-wrapper { background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(253, 121, 168, 0.2); }
+        /* 左侧：视频播放器与诱导介绍 */
+        .main-content { background: #16161e; padding: 20px; border-radius: 16px; border: 1px solid #22222e; }
+        .video-wrapper { background: #000; border-radius: 12px; overflow: hidden; margin-bottom: 20px; border: 2px solid #ff007f; box-shadow: 0 4px 25px rgba(255, 0, 127, 0.25); }
         video { width: 100%; display: block; outline: none; }
-        .video-title { font-size: 22px; margin-bottom: 10px; font-weight: 600; color: #fff; }
-        .video-meta { font-size: 13px; color: #888; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #2e2e38; }
-        .video-description { font-size: 14px; color: #ccc; text-align: justify; margin-bottom: 20px; }
+        .video-title { font-size: 24px; margin-bottom: 10px; font-weight: bold; color: #fff; }
+        .video-meta { font-size: 13px; color: #888; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #282838; }
+        .video-description { font-size: 15px; color: #ccc; text-align: justify; margin-bottom: 25px; background: #1f1f2a; padding: 15px; border-radius: 8px; border-left: 4px solid #ff007f; }
 
-        /* 🔥 特效引流按钮样式 */
-        .tg-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #0088cc, #24a1de); color: white; text-decoration: none; padding: 14px 20px; border-radius: 30px; font-size: 18px; font-weight: bold; text-align: center; box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4); transition: all 0.3s ease; animation: pulse 2s infinite; margin-top: 15px; }
-        .tg-btn:hover { background: linear-gradient(135deg, #24a1de, #0088cc); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 136, 204, 0.6); }
+        /* 🔥 终极引流大按钮（带强力呼吸特效） */
+        .tg-premium-btn { display: flex; align-items: center; justify-content: center; gap: 12px; background: linear-gradient(135deg, #0088cc, #24a1de); color: white; text-decoration: none; padding: 18px 25px; border-radius: 35px; font-size: 20px; font-weight: bold; text-align: center; box-shadow: 0 0 20px rgba(0, 136, 204, 0.5); transition: all 0.3s ease; animation: pulse 1.8s infinite; margin: 20px 0; }
+        .tg-premium-btn:hover { background: linear-gradient(135deg, #24a1de, #0088cc); transform: translateY(-3px); box-shadow: 0 0 30px rgba(0, 136, 204, 0.8); }
         
-        /* 按钮呼吸动画特效 */
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.03); box-shadow: 0 4px 25px rgba(0, 136, 204, 0.7); }
+            50% { transform: scale(1.03); box-shadow: 0 0 30px rgba(255, 0, 127, 0.6); }
             100% { transform: scale(1); }
         }
 
-        /* 右侧内容区 */
+        /* 右侧：粉丝好评反馈 + 诱人广告位 */
         .sidebar { display: flex; flex-direction: column; gap: 20px; }
-        .widget { background: #1b1b22; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .widget-title { font-size: 16px; font-weight: bold; margin-bottom: 15px; border-left: 4px solid #fd79a8; padding-left: 10px; color: #fff; }
+        .widget { background: #16161e; padding: 20px; border-radius: 16px; border: 1px solid #22222e; }
+        .widget-title { font-size: 16px; font-weight: bold; margin-bottom: 15px; border-left: 4px solid #0088cc; padding-left: 10px; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* 侧边栏引流广告位 */
-        .ad-banner { background: #251e27; border: 2px dashed #fd79a8; border-radius: 8px; padding: 15px; text-align: center; color: #fd79a8; text-decoration: none; display: block; transition: transform 0.2s; }
-        .ad-banner:hover { transform: scale(1.02); }
-        .ad-banner img { width: 100%; max-height: 140px; object-fit: cover; border-radius: 6px; margin-bottom: 10px; }
-        .ad-tag { display: inline-block; background: #fd79a8; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px; float: right; margin-top: -5px; }
+        /* 伪装OnlyFans广告图 */
+        .ad-banner { background: #1e1724; border: 1px dashed #ff007f; border-radius: 10px; padding: 15px; text-align: center; color: #ff007f; text-decoration: none; display: block; transition: all 0.2s; }
+        .ad-banner:hover { transform: scale(1.02); background: #251b2e; }
+        .ad-banner img { width: 100%; max-height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
 
-        /* 精彩视频推荐列表 */
-        .recommend-item { display: flex; gap: 10px; margin-bottom: 15px; text-decoration: none; color: inherit; transition: opacity 0.2s; }
-        .recommend-item:hover { opacity: 0.8; }
-        .recommend-item img { width: 100px; height: 60px; object-fit: cover; border-radius: 6px; background: #2a2a35; }
-        .recommend-info h4 { font-size: 14px; line-height: 1.3; color: #eee; }
-        .recommend-info p { font-size: 12px; color: #fd79a8; margin-top: 5px; }
+        /* 强大的买家秀反馈模块（真实聊天感） */
+        .feedback-list { display: flex; flex-direction: column; gap: 15px; }
+        .feedback-item { background: #1f1f2a; padding: 12px; border-radius: 8px; border: 1px solid #2d2d3d; }
+        .user-info { display: flex; justify-content: space-between; font-size: 12px; color: #ff007f; margin-bottom: 5px; font-weight: bold; }
+        .user-info span.date { color: #666; font-weight: normal; }
+        .feedback-text { font-size: 13px; color: #ddd; font-style: italic; }
 
         /* 页脚 */
-        footer { background: #16161a; color: #666; text-align: center; padding: 20px; font-size: 13px; margin-top: 40px; border-top: 2px solid #2e2e38; }
+        footer { background: #0b0b0e; color: #444; text-align: center; padding: 30px; font-size: 12px; margin-top: 40px; border-top: 1px solid #1a1a24; }
 
-        /* 移动端全面自适应 */
+        /* 移动端100%全自适应 */
         @media (max-width: 768px) {
             .container { grid-template-columns: 1fr; }
             header { padding: 15px; }
-            nav { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 顶部导航 -->
+    <!-- 顶部导航栏 -->
     <header>
-        <a href="#" class="logo">🔮 魅影TV</a>
-        <nav>
-            <a href="#" class="active">女神回放</a>
-            <a href="#">福利专区</a>
-            <a href="#">私密频道</a>
-            <a href="#">联系客服</a>
-        </nav>
+        <a href="#" class="logo">💋 LOVENSE LIVE</a>
+        <div class="status-badge">🔴 LIVE NOW</div>
     </header>
 
-    <!-- 主容器 -->
+    <!-- 核心容器 -->
     <div class="container">
         
-        <!-- 左侧：主要视频播放与TG引流 -->
+        <!-- 左侧：你的主要试看视频与TG强引流区 -->
         <div class="main-content">
             <div class="video-wrapper">
-                <!-- 核心：自动读取加载你保存在GitHub目录下的视频文件 ZW889.mp4 -->
-                <video controls preload="auto" poster="https://picsum.photos">
+                <!-- 核心：依然完美绑定你保存在GitHub里的 ZW889.mp4 视频 -->
+                <video controls preload="auto" loop poster="https://picsum.photos">
                     <source src="ZW889.mp4" type="video/mp4">
-                    您的浏览器不支持播放该视频。
+                    Your browser does not support the video tag.
                 </video>
             </div>
-            <h1 class="video-title">【独家私密回放】高颜值尤物女主播·深夜心动福利瞬间</h1>
-            <div class="video-meta">本场热度：🔥 52.8万 · 录制投稿 · 已收录至精品库</div>
+            <h1 class="video-title">1-on-1 Remote Control Show (Preview Clip)</h1>
+            <div class="video-meta">Room Level: VIP Exclusive · Active Users: 12,405 · Status: Synced</div>
+            
             <p class="video-description">
-                错过了昨晚直播间的精彩整活？这里为你奉上无删减高清录制版！顶级身材尤物女主播激情互动、大秀才艺，名场面高能不断。网页加载已完成无损画质还原。如果你想解锁更多该主播的未删减私密日常、定制VLOG和第一手福利动态，赶快点击下方加入我们的官方 Telegram 交流群！
+                <strong>Attention Daddy:</strong> In the public stream, you are just a spectator. But inside my private room, you have complete control over my body. The video above is just a short preview from yesterday's session. Due to platform restrictions, my full live show and the real-time interactive toy link have been migrated to my Telegram Private Club.
             </p>
 
-            <!-- 🔥 左侧主引流按钮（请将下面的 t.me/xxxx 换成你真实的 TG 链接） -->
-            <a href="https://t.me/LEILUO8889" target="_blank" class="tg-btn">
-                ✈️ 点击加入 Telegram 私密粉丝群（解锁更多精选）
+            <!-- 🔥 极其明显的TG主引流大按钮（请把 https://t.me 换成你的真实TG） -->
+            <a href="https://t.me" target="_blank" class="tg-premium-btn">
+                ✈️ CONNECT TO MY TOY & JOIN TELEGRAM PRIVATE CLUB
             </a>
         </div>
 
-        <!-- 右侧边栏：侧边栏TG广告与其它主播推荐 -->
+        <!-- 右侧：往期男粉丝反馈栏目（洗脑证明真的能玩） -->
         <div class="sidebar">
             
-            <!-- 侧边栏高亮引流卡片 -->
+            <!-- 侧边栏高亮引流图 -->
             <div class="widget">
-                <div class="widget-title">官方永久社群 <span class="ad-tag">推荐</span></div>
-                <!-- 请将下面的 t.me/xxxx 换成你真实的 TG 频道或群组链接 -->
-                <a href="https://t.me/LEILUO8889" target="_blank" class="ad-banner">
-                    <img src="https://picsum.photos" alt="TG引流图">
-                    <strong>👉 极品御姐/萝莉资源天天更新 👈</strong>
-                    <p style="font-size: 13px; color: #bbb; margin-top: 8px; background: #0088cc; color:#fff; padding: 6px; border-radius:4px;">
-                        点此一键直达 Telegram 频道
-                    </p>
+                <div class="widget-title">Exclusive Reward</div>
+                <a href="https://t.me" target="_blank" class="ad-banner">
+                    <img src="https://picsum.photos" alt="Premium Content">
+                    <strong>👉 Unlock Full Uncensored Vault 👈</strong>
+                    <p style="font-size: 12px; color: #aaa; margin-top: 5px;">Get my personal contact & interactive code instantly in TG</p>
                 </a>
             </div>
 
-            <!-- 其它女主播精彩推荐 -->
+            <!-- 核心填充：真实的粉丝控制反馈（让进来的色狼更信以为真） -->
             <div class="widget">
-                <div class="widget-title">实时热播回放</div>
-                
-                <a href="#" class="recommend-item">
-                    <img src="https://picsum.photos" alt="推荐">
-                    <div class="recommend-info">
-                        <h4>【百变妖精】性感黑丝热舞，直播间热度直接破百万</h4>
-                        <p>🔥 34.2万次观看</p>
+                <div class="widget-title">Recent Master Reviews</div>
+                <div class="feedback-list">
+                    
+                    <div class="feedback-item">
+                        <div class="user-info"><span>@Jason_VIP69 🇺🇸</span><span class="date">2026-06-18</span></div>
+                        <div class="feedback-text">"Damn, it really works! The moment I clicked max speed on the app, she screamed and shivered so hard in front of the camera. Best experience ever!"</div>
                     </div>
-                </a>
 
-                <a href="#" class="recommend-item">
-                    <img src="https://picsum.photos" alt="推荐">
-                    <div class="recommend-info">
-                        <h4>【纯欲天花板】清纯女神深夜连麦，土豪疯狂刷屏</h4>
-                        <p>🔥 19.9万次观看</p>
+                    <div class="feedback-item">
+                        <div class="user-info"><span>@Thomas_D 🇨🇦</span><span class="date">2026-06-15</span></div>
+                        <div class="feedback-text">"Her moans are so real when you trigger the vibration. Love being her Master in the TG private chat. Worth every penny."</div>
                     </div>
-                </a>
-                
-                <a href="#" class="recommend-item">
-                    <img src="https://picsum.photos" alt="推荐">
-                    <div class="recommend-info">
-                        <h4>【大尺度爆料】查房名场面：女主播和粉丝私密互动</h4>
-                        <p>🔥 45.1万次观看</p>
+                    
+                    <div class="feedback-item">
+                        <div class="user-info"><span>@Alpha_MaleX 🇬🇧</span><span class="date">2026-06-11</span></div>
+                        <div class="feedback-text">"Fast connection and totally anonymous. The App setup was easy after disabling play protect. She's so submissive!"</div>
                     </div>
-                </a>
+
+                </div>
             </div>
 
         </div>
@@ -153,7 +138,7 @@
 
     <!-- 页脚 -->
     <footer>
-        <p>© 2026 魅影TV · 聚合全网最火爆的女神直播名场面 · 未满18岁请主动离开</p>
+        <p>© 2026 Lovense Live Entertainment · 18+ NSFW Content Only · Powered by Encrypted Streaming Technology</p>
     </footer>
 
 </body>
